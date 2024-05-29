@@ -1,5 +1,10 @@
 const { defineConfig } = require("cypress");
+//------------exeldata-------------
+const xlsx = require('node-xlsx').default;
+const fs = require('fs');
+const path = require('path');
 
+//-----------mysql---------------------
 const mysql = require("mysql2");
 const connections = {
   stagingA: {
@@ -28,13 +33,14 @@ function queryDB(connectionInfo, query) {
     })
   })
 }
-
+//--------------mysql-------------------------
 //-------------------------------------------
 module.exports = defineConfig({
 
   e2e: {
     setupNodeEvents(on, config) {
       // implement node event listeners here
+      //------------------mysql-------------------------
       on("task", {
         // destructure the argument into the individual fields
         queryDatabase({ dbName, query }) {
@@ -45,11 +51,26 @@ module.exports = defineConfig({
           }
 
           return queryDB(connectionInfo, query)
-
         }
 
       });
+      //-----------------mysql---------------------------------
 
+      //------------------exeldata--------------
+
+      on("task", {
+        parseXlsx({ filePath }) {
+          return new Promise((resolve, reject) => {
+            try {
+              const jsonData = xlsx.parse(fs.readFileSync(filePath))
+              resolve(jsonData);
+            } catch (e) {
+              reject(e);
+            }
+          });
+        }
+      })
+      //---------------exeldata--------------
     },
 
   },

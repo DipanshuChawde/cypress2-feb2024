@@ -35,3 +35,8 @@ Cypress.Commands.add('registerUser', (un,ln,pin) => {
     cy.get('input[ placeholder="Post Code"]').type(pin)
     cy.get('button[type="submit"]').click({force:true})
  })
+
+
+ Cypress.Commands.add('parseXlsx', (inputFile) => {
+    return cy.task('parseXlsx' , { filePath: inputFile})
+})
