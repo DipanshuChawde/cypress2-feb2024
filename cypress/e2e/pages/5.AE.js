@@ -25,7 +25,13 @@ export default class MyAE{
         zipcode : '[id="zipcode"]',
         mobno : '[id="mobile_number"]',
         createAccBtn : '[data-qa="create-account"]',
-        accCreated : '[data-qa="account-created"]'
+        accCreated : '[data-qa="account-created"]',
+        continueBtn : '[data-qa="continue-button"]',
+        userLogin : 'a > b',
+        logoutBtn : 'a[href="/logout"]',
+        loginEmail :  '[data-qa="login-email"]',
+        loginPsw : '[data-qa="login-password"]',
+        loginBtn : '[data-qa="login-button"]'
 
     }
 
@@ -67,9 +73,12 @@ export default class MyAE{
         cy.get(this.selectors.zipcode).type(data.zipcode)
         cy.get(this.selectors.mobno).type(data.mobno)
         cy.get(this.selectors.createAccBtn).click()
+    }
 
-
-
+    loginUser(email,pw){
+        cy.get(this.selectors.loginEmail).type(email)
+        cy.get(this.selectors.loginPsw).type(pw)
+        cy.get(this.selectors.loginBtn).click()
 
     }
 }

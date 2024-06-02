@@ -19,5 +19,16 @@ describe('verify new user sign up page ',function(){
 
         pg.AccountInfo(title,data)
         pg.validateText(pg.selectors.accCreated,'Account Created!')
+
+        // validation
+        pg.btnClick(pg.selectors.continueBtn)
+        pg.validateText(pg.selectors.userLogin,data.username)
+
+        //logout
+        pg.btnClick(pg.selectors.logoutBtn)
+
+        // login with registered user
+        pg.loginUser(data.email,data.password)
+        pg.validateText(pg.selectors.userLogin,data.username)
     })
 })
