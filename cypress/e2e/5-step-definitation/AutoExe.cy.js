@@ -21,6 +21,11 @@ describe("verify login functionality",function(){
         }
 
         pg.newUserCreate(title,data)
+        pg.validatetext(pg.selector.accountcreatedText,'Account Created!')
+        pg.btnClick(pg.selector.loginSinup)
+        pg.btnClick(pg.selector.logout)
+        pg.loginUser(data)
+        pg.validatetext(pg.selector.loginTextValidation,data.username)
 
 
 
