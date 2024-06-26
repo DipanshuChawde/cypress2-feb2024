@@ -13,17 +13,17 @@ describe('verify multitab windows',function(){
             link=myLink
         })
 
-        // cy.get('a[class="thm-btn"]').eq(2).scrollTo('bottom',{ensureScrollable: false}).invoke('removeAttr','target').click()
-        // cy.url().should('contains','notification/')
+        cy.get('a[class="thm-btn"]').eq(2).scrollTo('bottom',{ensureScrollable: false}).invoke('removeAttr','target').click()
+        cy.url().should('contains','notification/')
 
 
-        cy.window().then(win => {
-            cy.stub(win, 'open').as('pdfOpen');
-          });
+        // cy.window().then(win => {
+        //     cy.stub(win, 'open').as('pdfOpen');
+        //   });
           
-          cy.get('a[class="thm-btn"]').eq(2).scrollTo('bottom',{ensureScrollable: false}).invoke('removeAttr','target').click()
-        //cy.url().should('contains','notification/')
-         cy.get('@pdfOpen').should('be.called');
+        //   cy.get('a[class="thm-btn"]').eq(2).scrollTo('bottom',{ensureScrollable: false}).invoke('removeAttr','target').click()
+        // //cy.url().should('contains','notification/')
+        //  cy.get('@pdfOpen').should('be.called');
           //cy.url().should('contains','notification/')
 
 
