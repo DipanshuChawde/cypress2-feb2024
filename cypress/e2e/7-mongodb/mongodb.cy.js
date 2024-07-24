@@ -23,6 +23,9 @@ describe('verify mongodb incypress',function(){
 //             uri: 'mongodb://localhost:27017', 
 //             database: 'database_name', 
 //             collection: 'collection_name' 
+//             -------Note: only mongodb.uri is mandatory, 
+//             you can always override/set database and collection names in each cypress mongodb command using options.
+//             You can set both local and remote urls. -------   
 //         }
 //     },
 //     e2e: {
