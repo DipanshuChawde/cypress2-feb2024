@@ -22,3 +22,6 @@ import './commands'
 
 import { addCommands } from 'cypress-mongodb/dist/index-browser'; //mongodb
 addCommands();  //mongodb
+
+
+require('cy-verify-downloads').addCustomCommand(); // file download

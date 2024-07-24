@@ -1,6 +1,7 @@
 const { defineConfig } = require("cypress");
-//import { configurePlugin } from 'cypress-mongodb'; //mongodb
-const { configurePlugin } = require('cypress-mongodb');
+const { configurePlugin } = require('cypress-mongodb'); //mongodb
+const { verifyDownloadTasks } = require('cy-verify-downloads'); //file download
+
 //------------exeldata-------------
 const xlsx = require('node-xlsx').default;
 const fs = require('fs');
@@ -43,6 +44,8 @@ module.exports = defineConfig({
       // implement node event listeners here
 
       configurePlugin(on); //mongo db
+
+      on('task', verifyDownloadTasks); //verify download
       //------------------mysql-------------------------
       on("task", {
         // destructure the argument into the individual fields
@@ -82,4 +85,6 @@ module.exports = defineConfig({
     }
 },
 //-------------mongodb---------------------
+//downloadsFolder:"cypress/e2e/8-fileDownload/downloadFile"
+
 });
