@@ -1,4 +1,6 @@
 const { defineConfig } = require("cypress");
+//import { configurePlugin } from 'cypress-mongodb'; //mongodb
+const { configurePlugin } = require('cypress-mongodb');
 //------------exeldata-------------
 const xlsx = require('node-xlsx').default;
 const fs = require('fs');
@@ -26,10 +28,8 @@ function queryDB(connectionInfo, query) {
       if (error) {
         return reject(error);
       }
-
       connection.end();
       return resolve(results);
-
     })
   })
 }
@@ -37,23 +37,22 @@ function queryDB(connectionInfo, query) {
 //-------------------------------------------
 module.exports = defineConfig({
   //chromeWebSecurity: false,
-  chromeWebSecurity :false,
+  chromeWebSecurity :false,   //for multitab and multi-window
   e2e: {
     setupNodeEvents(on, config) {
       // implement node event listeners here
+
+      configurePlugin(on); //mongo db
       //------------------mysql-------------------------
       on("task", {
         // destructure the argument into the individual fields
         queryDatabase({ dbName, query }) {
           const connectionInfo = connections[dbName]
-
           if (!connectionInfo) {
             throw new Error(`Do not have DB connection under name ${dbName}`)
           }
-
           return queryDB(connectionInfo, query)
         }
-
       });
       //-----------------mysql---------------------------------
 
@@ -72,7 +71,15 @@ module.exports = defineConfig({
         }
       })
       //---------------exeldata--------------
-    },
-
+     },
   },
+  //-------------mongodb---------------------
+  env: {
+    mongodb: {
+        uri: 'mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.2.3',
+        database: 'testdb1',
+        collection: 'studentInfo'
+    }
+},
+//-------------mongodb---------------------
 });

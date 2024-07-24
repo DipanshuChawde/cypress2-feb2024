@@ -6,8 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "openCypress": "npx cypress open",
-    "command1" : "cypress run --env environment=qa, "
-
+    "command1": "cypress run --env environment=qa, "
   },
   "keywords": [],
   "author": "",
@@ -17,6 +16,7 @@
     "node-xlsx": "^0.24.0"
   },
   "dependencies": {
+    "cypress-mongodb": "^6.2.0",
     "mysql": "^2.18.1",
     "mysql2": "^3.9.8"
   }

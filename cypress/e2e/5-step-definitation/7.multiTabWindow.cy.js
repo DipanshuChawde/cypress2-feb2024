@@ -11,16 +11,9 @@ describe('verify multitab and multi window in cypress', function () {
         cy.url().should('contain', '/courses')
     })
 
-    it('verify href property of multitab-letkode without removing target property', function () {
-        cy.visit('https://www.letskodeit.com/practice')
-        cy.get('[id="opentab"]').then(function (newTab) {
-            let url = newTab.prop('href')
-            cy.visit(url)
-            cy.url().should('contain', '/courses')
-        })
-    })
+     
 
-    it.only('verify muti window property in cypress-letkodeit', function () {
+    it('verify muti window property in cypress-letkodeit', function () {
         cy.visit('https://www.letskodeit.com/practice')
 
         cy.window().then((win) => {
@@ -34,7 +27,7 @@ describe('verify multitab and multi window in cypress', function () {
         cy.url().should('contain', '/courses')
     })
 
-    it.only('verify muti window property in cypress-rohitshetty', function () {
+    it('verify muti window property in cypress-rohitshetty', function () {
         cy.visit('https://rahulshettyacademy.com/AutomationPractice/')
 
         cy.window().then((win) => {
@@ -47,6 +40,16 @@ describe('verify multitab and multi window in cypress', function () {
         cy.url().should('contain','qaclickacademy')
 
 
+    })
+
+
+    it.only('verify href property of multitab-rahual without removing target property', function () {
+        cy.visit('https://rahulshettyacademy.com/AutomationPractice/')
+        cy.get('[class="btn-style class1 class2"]').then(function (newTab) {
+            let url = newTab.prop('href')
+            cy.visit(url)
+            cy.url().should('contain', 'qaclickacademy')
+        })
     })
 
 })
